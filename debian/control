@@ -13,13 +13,33 @@ Homepage: https://www.wireguard.com
 Vcs-Git: https://github.com/EggieCode/wireguard-ppa.git
 Vcs-Browser: https://github.com/EggieCode/wireguard-ppa
 
+Package: wireguard
+Architecture: all
+Depends:
+ wireguard-dkms (>= 0.0.20191219) | wireguard-modules (>= 0.0.20191219),
+ wireguard-tools (>= ${source:Version}),
+ ${misc:Depends},
+Description: fast, modern, secure kernel VPN tunnel (metapackage)
+ WireGuard is a novel VPN that runs inside the Linux Kernel and uses
+ state-of-the-art cryptography (the "Noise" protocol). It aims to be
+ faster, simpler, leaner, and more useful than IPSec, while avoiding
+ the massive headache. It intends to be considerably more performant
+ than OpenVPN. WireGuard is designed as a general purpose VPN for
+ running on embedded interfaces and super computers alike, fit for
+ many different circumstances. It runs over UDP.
+ .
+ This metapackage explicitly depends on both the kernel module and the
+ userspace tooling, and tries to load the new kernel module upon
+ installation, if wireguard is already in use on the system.
+
 Package: wireguard-tools
 Architecture: linux-any
 Depends:
  ${misc:Depends},
  ${shlibs:Depends}
 Recommends:
- wireguard-dkms | wireguard-modules
+ nftables | iptables,
+ wireguard-dkms (>= 0.0.20191219) | wireguard-modules (>= 0.0.20191219),
 Description: fast, modern, secure kernel VPN tunnel (userland utilities)
  WireGuard is a novel VPN that runs inside the Linux Kernel and uses
  state-of-the-art cryptography (the "Noise" protocol). It aims to be
